@@ -26,7 +26,7 @@ TODOAPP_DATABASE_NAME=
 ```
 * Run the container with the following command
 ```shell
-docker run -it -p 3000:3000 --env-file .\.env bcrowe/todoapp:latest
+docker run -d -p 3000:3000 --env-file .\.env bcrowe/todoapp:latest
 ```
 * Make sure to substitue the publish port(-p) to whatever port your chose in your .env file.
 
