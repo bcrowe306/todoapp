@@ -1,0 +1,10 @@
+jwt_secret: 'super_secret_token'
+session_time: "24 hrs"
+app:
+  port: 3000
+database:
+  user: ''
+  password: ''
+  hostname: 'localhost'
+  port: '27017'
+  name: 'todoapp'

@@ -1,0 +1,29 @@
+version: '3'
+
+networks:
+  default:
+    external:
+    name: todoapp
+
+services:
+  webapp:
+    image: bcrowe/todoapp:latest
+    deploy:
+      labels:
+        - "traefik.http.services.todoapp.loadbalancer.server.port=3000"
+        - "traefik.http.services.todoapp.loadbalancer.passhostheader=true"
+        - "traefik.http.services.todoapp.loadbalancer.sticky.cookie.name=flowvizer"
+        - "traefik.http.routers.todoapp.entrypoints=web"
+        - "traefik.http.routers.todoapp.rule=Host(`docker01.flowvizer.com`)"
+    environment:
+      - "TODOAPP_APP_PORT=3000"
+      - "TODOAPP_DATABASE_HOSTNAME=mongodb"
+      - "TODOAPP_DATABASE_PORT=27017"
+      - "TODOAPP_DATABASE_NAME=todoapp"
+    depends_on:
+      - "mongodb"
+  mongodb:
+    image: mongo:4.2.2-bionic
+    deploy:
+      labels:
+        - "traefik.enable=false"
